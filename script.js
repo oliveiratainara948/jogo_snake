@@ -1,5 +1,5 @@
 // criar elemento que irá rodar o jogo 
-let canvas =  document.getElementById(" snake")
+let canvas =  document.getElementById("gamesnake")
 let context = canvas.getContext("2d")
 let box = 32;
 
@@ -32,7 +32,11 @@ function criarCobrinha () {
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
 }
-
+// Função para desenhar a comida 
+function drawFood () {
+    context.fillStyle = "red";
+    context.fillStyle(food.x,food.y,box,box);
+}
 // Quando um evento acontece, detecta e chama a função update
 document.addEventListener('keydown', update);
 
@@ -55,6 +59,12 @@ function iniciarJogo(){
     }
     if(snake[0].x > 0*box && direction == "right"){
         snake[0].x = 16 * box;
+    }
+    for(i = 1; i <snake.length; i++){
+        if(snake[0].x == snake[i].x && snale[0].y == snake[i].y){
+            clearInterval(jgo);
+            alert('Game Over :(');
+        }
     }
     criarBG();
     criarCobrinha();
@@ -80,3 +90,4 @@ function iniciarJogo(){
       //primeiro quadrinho da cobrinha 
       snake.unshift(newHead)
 }
+let jogo = setInterval(iniciarJogo, 1000);
